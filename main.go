@@ -12,7 +12,7 @@ import (
 type Task struct {
   ID string `json:"id"`
   Description string `json:"task"`
-  Done bool `json: false`	
+  Status bool `json:"done"`	
 }
 
 var tasks []Task
@@ -22,26 +22,25 @@ func getTasks(w http.ResponseWriter, r *http.Request) {
   json.NewEncoder(w).Encode(tasks)
 }
 
+func createTask(w http.ResponseWriter, r *http.Request) {
+  w.Header().Set("Content-Type", "application/json")
+  var task Task
+  _ = json.NewDecoder(r.Body).Decode(&task)
+  task.ID = strconv.Itoa(rand.Intn(1000000))
+  tasks = append(tasks, task)
+  json.NewEncoder(w).Encode(&task)
+}
+
 func getTask(w http.ResponseWriter, r *http.Request) {
   w.Header().Set("Content-Type", "application/json")
   params := mux.Vars(r)
   for _, item := range tasks {
     if item.ID == params["id"] {
       json.NewEncoder(w).Encode(item)
-      break
+      return
     }
-    return
   }
   json.NewEncoder(w).Encode(&Task{})
-}
-
-func createTask(w http.ResponseWriter, r *http.Request) {
-  w.Header().Set("Content-Type", "application/json")
-  var task Task
-  _ = json.NewDecoder(r.Body).Decode(task)
-  task.ID = strconv.Itoa(rand.Intn(1000000))
- tasks = append(tasks, task)
-  json.NewEncoder(w).Encode(&task)
 }
 
 func updateTask(w http.ResponseWriter, r *http.Request) {
@@ -51,10 +50,11 @@ func updateTask(w http.ResponseWriter, r *http.Request) {
     if item.ID == params["id"] {
       tasks = append(tasks[:index], tasks[index+1:]...)
       var task Task
-      _ = json.NewDecoder(r.Body).Decode(task)
+      _ = json.NewDecoder(r.Body).Decode(&task)
       task.ID = params["id"]
       tasks = append(tasks, task)
       json.NewEncoder(w).Encode(&task)
+      
       return
     }
   }
@@ -77,7 +77,7 @@ func main() {
   fmt.Println("It works!!!")
   router := mux.NewRouter()	
   
-  tasks = append(tasks, Task{ID: "1", Description: "My first Task", Done: false})
+  tasks = append(tasks, Task{ID: "1", Description: "My first Task", Status: false})
   
   router.HandleFunc("/tasks", getTasks).Methods("GET")
   router.HandleFunc("/tasks", createTask).Methods("POST")
