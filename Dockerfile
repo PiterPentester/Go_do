@@ -10,7 +10,7 @@ RUN yum install -y epel-release git \
     && touch /root/start.sh \ 
     && echo "#!/bin/sh" >> /root/start.sh \
     && echo "runuser -l git -c '/root/main'" >> /root/start.sh \
-    && chmod ugo+x /root/start.sh \
+    && chmod ugo+x /root/start.sh
 
 EXPOSE 9876
 
