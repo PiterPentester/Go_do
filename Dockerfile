@@ -4,8 +4,7 @@ FROM centos:centos7
 
 COPY main /root/main
 
-RUN yum install -y epel-release git \
-    && useradd -mr git \
+RUN useradd -mr git \
     && chmod +x /root/main \
     && touch /root/start.sh \ 
     && echo "#!/bin/sh" >> /root/start.sh \
