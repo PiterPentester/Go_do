@@ -1,4 +1,4 @@
-### Dockerfile for my own GO_DO app  (by Bogdan Pakhomov) ###
+### Dockerfile for my own GO_DO app  (by Bogdan Pakhomov) 15.11.19 ###
 
 FROM centos:centos7
 
