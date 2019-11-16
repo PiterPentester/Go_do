@@ -1,17 +1,20 @@
-### Dockerfile for my own GO_DO app  (by Bogdan Pakhomov) 15.11.19 ###
+### Dockerfile for my own GO_DO app  (by Bogdan Pakhomov) 16.11.19 ###
 
-FROM centos:centos7
+# golang image where workspace (GOPATH) configured at /go.
+FROM golang:latest
 
+# Copy the local package files to the container’s workspace.
 COPY main /root/main
 
-RUN useradd -mr git \
+RUN go get github.com/gorilla/mux \
+    && useradd -mr godo-user \
     && chmod +x /root/main \
-    && mkdir -p /home/git/go_do \
-    && mv /root/main /home/git/go_do \
-    && chown -R git:git /home/git/go_do \
+    && mkdir -p /home/godo-user/go_do \
+    && mv /root/main /home/godo-user/go_do \
+    && chown -R godo-user:godo-user /home/godo-user/go_do \
     && touch /root/start.sh \ 
     && echo "#!/bin/sh" >> /root/start.sh \
-    && echo "runuser -l git -c '/home/git/go_do/main'" >> /root/start.sh \
+    && echo "runuser -l godo-user -c '/home/godo-user/go_do/main'" >> /root/start.sh \
     && chmod ugo+x /root/start.sh
 
 EXPOSE 9876
