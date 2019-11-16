@@ -85,5 +85,5 @@ func main() {
   router.HandleFunc("/tasks/{id}", updateTask).Methods("PUT")
   router.HandleFunc("/tasks/{id}", deleteTask).Methods("DELETE")
   
-  http.ListenAndServe(":9876", router)
+  http.ListenAndServe("0.0.0.0:9876", router)
 }
