@@ -79,11 +79,11 @@ func main() {
   
   tasks = append(tasks, Task{ID: "1", Description: "My first Task", Status: false})
   
-  router.HandleFunc("/tasks", getTasks).Methods("GET")
-  router.HandleFunc("/tasks", createTask).Methods("POST")
-  router.HandleFunc("/tasks/{id}", getTask).Methods("GET")
-  router.HandleFunc("/tasks/{id}", updateTask).Methods("PUT")
-  router.HandleFunc("/tasks/{id}", deleteTask).Methods("DELETE")
+  router.HandleFunc("/api/v1/tasks", getTasks).Methods("GET")
+  router.HandleFunc("/api/v1/tasks", createTask).Methods("POST")
+  router.HandleFunc("/api/v1/tasks/{id}", getTask).Methods("GET")
+  router.HandleFunc("/api/v1/tasks/{id}", updateTask).Methods("PUT")
+  router.HandleFunc("/api/v1/tasks/{id}", deleteTask).Methods("DELETE")
   
   http.ListenAndServe(":9876", router)
 }
