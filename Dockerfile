@@ -3,8 +3,8 @@
 FROM scratch
 
 # Copy the local package files to the container’s workspace.
-ADD godo-for-image /
+ADD godo-app /
 
 EXPOSE 9876
 
-CMD ["/godo-for-image"]
+CMD ["/godo-app"]
