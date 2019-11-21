@@ -3,7 +3,7 @@
 FROM scratch
 
 # Copy the local package files to the container’s workspace.
-ADD godo-app /
+ADD app.ini godo-app /
 
 EXPOSE 9876
 
