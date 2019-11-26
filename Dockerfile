@@ -4,7 +4,7 @@ FROM centos
 
 # Copy the local package files to the container’s workspace.
 
-COPY godo-app /
+ADD godo-app /
 
 RUN groupadd -r godo -g 433 \ 
     && useradd -u 431 -r -g godo -d /app -s /sbin/nologin -c "Docker image user" godo \
