@@ -18,4 +18,4 @@ VOLUME ["/home/godo"]
 
 USER godo
 
-CMD ["./home/godo/godo-app"]
+CMD ["/home/godo/godo-app"]
