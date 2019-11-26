@@ -13,9 +13,17 @@ spec:
         - name: go-do-container
           image: $IMAGE
           imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /home/godo/app.ini
           ports:
             - containerPort: $PORT
               protocol: TCP
+      
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: godo-ini
 ---
 apiVersion: v1
 kind: Service

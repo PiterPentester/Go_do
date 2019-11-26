@@ -33,7 +33,7 @@ func readFile(path string) ([]string, error) {
 }
 
 func configureApp() {
-  lines, err := readFile("app.ini")
+  lines, err := readFile("/home/godo/app.ini")
   if err != nil {
     log.Fatalf("readConfig: %s", err)
   }
