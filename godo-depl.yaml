@@ -15,7 +15,7 @@ spec:
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: secret-volume
-              mountPath: /home/godo/app.ini
+              mountPath: /home/godo
           ports:
             - containerPort: $PORT
               protocol: TCP
