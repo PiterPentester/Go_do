@@ -18,6 +18,4 @@ VOLUME ["/home/godo"]
 
 USER godo
 
-WORKDIR ["/home/godo"]
-
-CMD ["./godo-app"]
+ENTRYPOINT ["/home/godo/godo-app"]
