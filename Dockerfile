@@ -18,4 +18,6 @@ VOLUME ["/home/godo"]
 
 USER godo
 
-CMD ["/home/godo/godo-app"]
+WORKDIR ["/home/godo"]
+
+CMD ["./godo-app"]
