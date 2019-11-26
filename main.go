@@ -4,9 +4,8 @@ import (
   "fmt"
   "github.com/gorilla/mux"
   "net/http"
-  //"database/sql"
-  //_"github.com/go-sql-driver/mysql"
-  //"io/ioutil"
+  "database/sql"
+  _"github.com/go-sql-driver/mysql"
 )
 
 type Task struct {
@@ -17,8 +16,6 @@ type Task struct {
 
 var tasks []Task
 
-//var db *sql.DB
-
 
 
 func main() {
@@ -27,13 +24,14 @@ func main() {
   
   configureApp()
   
-  /*db, err := sql.Open("mysql", "{db_user}:{db_pass}@({db_host}:{db_port})/{db_db}?parseTime=true")
+  db, err := sql.Open("mysql", config["db_user"] + ":" + config["db_pass"] + "@tcp(" + config["db_host"] + ":" + config["db_port"] + ")/")
   if err != nil {
-    log.Fatal(err)
+    panic(err)
   }
-  if err := db.Ping(); err != nil {
-    log.Fatal(err)
-  }*/
+  
+  defer db.Close()
+  
+  createDB(config["db_db"])
   
   tasks = append(tasks, Task{ID: "1", Description: "My first Task", Status: false})
   
